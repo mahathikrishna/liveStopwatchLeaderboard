@@ -67,20 +67,27 @@ function displayTable() {
       a.time > b.time ? 1 : b.time > a.time ? -1 : 0
     );
 
+    sortedLeaderboard.forEach(function (attendee) {
+      rank = rank + 1;
+      attendee.rank = rank;
+      revisedData.push(attendee);
+    });
+
+    // let firstTen = sortedLeaderboard.slice(0, 10);
+
     let lbTable = document
       .getElementById("leaderboard-table")
       .getElementsByTagName("tbody")[0];
 
-    console.log("before ", sortedLeaderboard);
-
     sortedLeaderboard.forEach(function (att) {
       let tableRow = lbTable.insertRow();
       tableRow.setAttribute("id", "rank" + att.rank);
+      if (att.rank > 10) {
+        tableRow.setAttribute("hidden", true);
+      }
       let rankCell = tableRow.appendChild(document.createElement("td"));
       rankCell.setAttribute("class", "rank");
-      rank = rank + 1;
-      att.rank = rank;
-      rankCell.textContent = rank;
+      rankCell.textContent = att.rank;
       let nameCell = tableRow.appendChild(document.createElement("td"));
       nameCell.textContent = att.name;
       let companyCell = tableRow.appendChild(document.createElement("td"));
@@ -93,11 +100,10 @@ function displayTable() {
       deleteLink = deleteCell.appendChild(document.createElement("img"));
       deleteLink.setAttribute("src", "./bin.png");
       deleteLink.setAttribute("class", "trash");
-      deleteLink.setAttribute("id", rank);
+      deleteLink.setAttribute("id", att.rank);
       deleteLink.addEventListener("click", deleteRecord);
-      revisedData.push(att);
     });
-    console.log("after ", sortedLeaderboard);
+
     localStorage.setItem("ranking", JSON.stringify(revisedData));
   }
 }
@@ -265,7 +271,7 @@ function saveTable() {
     let col = rows[i].querySelectorAll("th, td");
 
     let csv_row = [];
-    for (let j = 0; j < col.length; j++) {
+    for (let j = 0; j < col.length - 1; j++) {
       csv_row.push(col[j].innerHTML);
     }
 

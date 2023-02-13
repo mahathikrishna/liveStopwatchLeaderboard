@@ -247,7 +247,7 @@ label {
 }
 
 .export {
-  width: 30px;
+  /* width: 30px; */
   height: 30px;
   cursor: pointer;
   align-self: end;
@@ -256,4 +256,5 @@ label {
 
 .trash {
   cursor: pointer;
+  width: 20px;
 }
