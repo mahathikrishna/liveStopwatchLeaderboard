@@ -10,42 +10,68 @@
     <div class="container">
         <div class="header">
             <img class="logo" src="./MatcoLogo.jpg.webp" />
+            <h2>Leaderboard Standings</h2>
         </div>
         <div class="body">
             <div class="watchContainer">
-                <div>
-                    <form id="attendeeInfo">
-                        <label for="firstname">First Name: </label>
-                        <input type="text" id="firstname" name="firstname">
-                        <br>
-                        <label for="lastname">Last Name: </label>
-                        <input type="text" id="lastname" name="lastname">
-                        <br>
-                        <button type="button" id="submit" onclick="submitAttendee(this)">Submit</button>
-                    </form>
-                </div>
                 <div class="stopwatch">
-                    <!-- <h1>STOPWATCH</h1> -->
-                    <h2 id="currentAttendee"></h2>
-                    <p id="timer">00:00:00</p>
+                    <h1 class="stopwatchTitle">Current Contestant</h1>
+                    <p id="currentAttendee"></p>
+                    <p id="timer">00:00:000</p>
+                    <p class="subtitle">Smash the button on the table to start/stop the timer</p>
                     <div class="watchButtons">
-                        <button id="start" class="timerButtons">Start</button>
+                        <img src="./clockButton.png" id="toggleButton" />
+                        <!-- <button id="start" class="timerButtons">Start</button>
                         <button id="stop" class="timerButtons">Stop</button>
-                        <button id="reset" class="timerButtons">Reset</button>
+                        <button id="reset" class="timerButtons">Reset</button> -->
                     </div>
                 </div>
+                <div class="contestant">
+                    <p>Type your information here to enter</p>
+                    <form id="attendeeInfo">
+                        <div class="row">
+                            <div class="infoCol">
+                                <input type="text" id="rank" hidden>
+                                <label for="firstname">First Name</label>
+                                <br>
+                                <input type="text" id="firstname" name="firstname">
+                                <br>
+                                <label for="lastname">Last Name</label>
+                                <br>
+                                <input type="text" id="lastname" name="lastname">
+                                <br>
+                            </div>
+                            <div class="infoCol">
+                                <label for="company">Company Name</label>
+                                <br>
+                                <input type="text" id="company" name="company">
+                                <br>
+                                <label for="location">Location</label>
+                                <br>
+                                <input type="text" id="location" name="location">
+                                <br>
+                            </div>
+                        </div>
+                        <div class="formButtons">
+                            <button type="button" id="submit" onclick="submitAttendee(this)">Submit</button>
+                            <button id="reset" class="timerButtons">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
             <div class="leaderboard">
-                <div class="leaderboardTitle">
-                    <h1>LEADERBOARD</h1>
-                    <img class="export" src="./file.png" onclick="saveTable()" />
-                </div>
+                <h1>Top 10 Fastest</h1>
+                <img class="export" src="./file.png" onclick="saveTable()" />
                 <table id="leaderboard-table">
                     <thead>
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Location</th>
                             <th>Time</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
